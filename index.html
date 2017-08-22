@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My first Vue app</title>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+
+</head>
+
+
+<body>
+
+	<div id="maestro">
+
+			<input type="text" name="nombreP" value="Nombre" v-model="personaPost.nombre">
+			<input type="text" name="apellidosP" value="Apellidos" v-model="personaPost.apellido">
+			<input type="numeric" name="edadP" value="Edad" v-model="personaPost.edad">
+			<button id="crear" v-on:click="crearUsuario"> Crear persona </button>
+
+
+		<ul>
+			<li  v-for="persona in personas" v-on:click="mostrarDetalles(persona.id)"> {{persona.nombre }} {{ persona.apellido }} </li>
+		</ul>
+
+  		<div id="detalles">
+  			<p>Detalles:</p>
+  			<br>
+  			Id: <input type="numeric" name="idDetalle" v-model="personaDetalle.id" readonly>
+  			<br>
+  			Nombre: <input type="text" name="nombreDetalle" v-model="personaDetalle.nombre" readonly>
+  			<br>
+  			Apellidos: <input type="text" name="apellidoDetalle" v-model="personaDetalle.apellido" readonly>
+  			<br>
+  			Edad: <input type="numeric" name="edadDetalle" v-model="personaDetalle.edad" readonly>
+  			<br>
+
+  		</div>
+
+	</div>
+
+
+  <script type="text/javascript" src="main.js"></script>
+
+</body>
+</html>
