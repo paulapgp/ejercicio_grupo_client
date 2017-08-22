@@ -2,10 +2,11 @@
 <html>
 
 <head>
-  <title>My first Vue app</title>
+  <title>Maestro - Detalle</title>
   <script src="https://code.jquery.com/jquery.min.js"></script>
   <script src="https://unpkg.com/vue"></script>
 
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 
@@ -13,32 +14,71 @@
 
 	<div id="maestro">
 
-			<input type="text" name="nombreP" value="Nombre" v-model="personaPost.nombre">
-			<input type="text" name="apellidosP" value="Apellidos" v-model="personaPost.apellido">
-			<input type="numeric" name="edadP" value="Edad" v-model="personaPost.edad">
-			<button id="crear" v-on:click="crearUsuario"> Crear persona </button>
+    <div>
+      <button class="w3-btn w3-blue" id="ShowCrear" v-on:click="seenCreateAux"> Crear </button>
+      <button class="w3-btn w3-blue" id="ShowActualizar" v-on:click="seenUpdateAux"> Actualizar </button>
+      <button class="w3-btn w3-blue" id="ShowEliminar" v-on:click="seenDeleteAux"> Eliminar </button>
+    </div>
 
+    <br>
 
-		<ul>
-			<li  v-for="persona in personas" v-on:click="mostrarDetalles(persona.id)"> {{persona.nombre }} {{ persona.apellido }} </li>
-		</ul>
+    <!-- DIV PARA CREAR -->
+    <div class="w3-container w3-card-4" style="width:35%" v-if="seen.seenCreate && !seen.seenUpdate && !seen.seenDelete">
+        <label class="w3-text" for="nombreCreate"> Nombre </label>
+  			<input class="w3-input w3-border" type="text" name="nombreCreate" value="Nombre" v-model="personaPost.nombre">
+        <label class="w3-text" for="apellidosCreate"> Apellidos </label>
+  			<input class="w3-input w3-border" type="text" name="apellidosCreate" value="Apellidos" v-model="personaPost.apellido">
+        <label class="w3-text" for="edadCreate"> Edad </label>
+  			<input class="w3-input w3-border" type="numeric" name="edadCreate" value="Edad" v-model="personaPost.edad">
+        <br>
+  			<button class="w3-btn w3-blue" id="crear" v-on:click="crearPersona()"> Crear persona </button>
+    </div>
 
-  		<div id="detalles">
-  			<p>Detalles:</p>
-  			<br>
-  			Id: <input type="numeric" name="idDetalle" v-model="personaDetalle.id" readonly>
-  			<br>
-  			Nombre: <input type="text" name="nombreDetalle" v-model="personaDetalle.nombre" readonly>
-  			<br>
-  			Apellidos: <input type="text" name="apellidoDetalle" v-model="personaDetalle.apellido" readonly>
-  			<br>
-  			Edad: <input type="numeric" name="edadDetalle" v-model="personaDetalle.edad" readonly>
-  			<br>
+    <!-- DIV PARA ACTUALIZAR -->
+    <div class="w3-container w3-card-4" style="width:35%" v-if="!seen.seenCreate && seen.seenUpdate && !seen.seenDelete">
+      <label class="w3-text" for="idAct"> Id </label>
+      <input class="w3-input w3-border" type="numeric" name="idAct" value="Id" v-model="personaPut.id">
+      <label class="w3-text" for="nombreAct"> Nombre </label>
+      <input class="w3-input w3-border" type="text" name="nombreAct" value="Nombre" v-model="personaPut.nombre">
+      <label class="w3-text" for="apellidosAct"> Apellidos </label>
+      <input class="w3-input w3-border" type="text" name="apellidosAct" value="Apellidos" v-model="personaPut.apellido">
+      <label class="w3-text" for="edadAct"> Edad </label>
+      <input class="w3-input w3-border" type="numeric" name="edadAct" value="Edad" v-model="personaPut.edad">
+      <br>
+      <button class="w3-btn w3-blue" id="actualizar" v-on:click="actualizarPersona()"> Actualizar Persona </button>
+    </div>
 
+    <!-- DIV PARA ELIMINAR -->
+    <div class="w3-container w3-card-4" style="width:35%" v-if="!seen.seenCreate && !seen.seenUpdate && seen.seenDelete">
+      <label class="w3-text" for="idDel"> Id </label>
+      <input class="w3-input w3-border" type="numeric" name="idDel" value="Id" v-model="personaDel.id">
+      <br>
+      <button class="w3-btn w3-blue" id="eliminar" v-on:click="eliminarPersona()"> Eliminar Persona </button>
+    </div>
+
+    <br>
+
+    <div style="display:inline-block; vertical-align:top">
+  		<ul class="w3-ul w3-card-4" >
+        <li><h2> Personas </h2></li>
+  			<li class="w3-hover-blue" v-for="persona in personas" v-on:click="mostrarDetalles(persona.id)"> {{persona.nombre }} {{ persona.apellido }} </li>
+  		</ul>
+    </div>
+
+  		<div class="w3-container w3-card-4" style="display:inline-block; vertical-align:top" id="detalles">
+  			<h2>Datos de {{personaDetalle.nombre }} {{ personaDetalle.apellido }}</h2>
+        <label class="w3-text" for="idDetalle"> Id </label>
+        <input class="w3-input w3-border" type="numeric" name="idDetalle" v-model="personaDetalle.id" readonly>
+        <label class="w3-text" for="nombreDetalle"> Nombre </label>
+  			<input class="w3-input w3-border" type="text" name="nombreDetalle" v-model="personaDetalle.nombre" readonly>
+        <label class="w3-text" for="apellidoDetalle"> Apellidos </label>
+  			<input class="w3-input w3-border" type="text" name="apellidoDetalle" v-model="personaDetalle.apellido" readonly>
+        <label class="w3-text" for="edadDetalle"> Edad </label>
+  			<input class="w3-input w3-border" type="numeric" name="edadDetalle" v-model="personaDetalle.edad" readonly>
+        <br>
   		</div>
 
 	</div>
-
 
   <script type="text/javascript" src="main.js"></script>
 
