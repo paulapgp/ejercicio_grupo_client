@@ -54,6 +54,9 @@
               _this.limpiarCamposPost();
               _this.limpiarCamposSeen();
               _this.limpiarCamposDetalles();
+          })
+          .fail(function(data) {
+              alert( "error" );
           });
         },
 
@@ -76,6 +79,9 @@
             _this.limpiarCamposPut();
             _this.limpiarCamposSeen();
             _this.limpiarCamposDetalles();
+        })
+        .fail(function(data) {
+            alert( "error" );
         });
       },
 
@@ -97,6 +103,9 @@
           _this.limpiarCamposDelete();
           _this.limpiarCamposSeen();
           _this.limpiarCamposDetalles();
+      })
+      .fail(function(data) {
+          alert( "error" );
       });
     },
 
